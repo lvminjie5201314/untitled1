@@ -1,58 +1,57 @@
 <template>
   <div id="app">
-    <img alt="Vue logo" src="./assets/logo.png">
-    <HelloWorld msg="Welcome to Your Vue.js App"/>
-    <h2>我的vue</h2>
-    <input type="text" v-model="mytext"/>
-    <button type="button" @click="handclick()">add</button>
-    <ul id="text-ul">
-      <li v-for="data in datalist" :key="data">
-        {{data}}<button type="button">del</button>
-      </li>
-    </ul>
-    <child1 myname="来自父组件的问候"><br>
-      <slot>slot演示</slot>
-    </child1>
+<!--底部导航-->
+    <tabber></tabber>
+<!--  路由插槽  -->
+    <section>
+        <router-view></router-view>
+    </section>
+
   </div>
 </template>
 
 <script>
-import HelloWorld from './components/HelloWorld.vue';
-import Child1 from "@/components/Child1";
+  // 导入组件
+import tabber from '@/components/Tapbar'
 
 
 export default {
   data(){
     return{
-      mytext:'11111111',
-      datalist:[]
+
     }
   },
-  name: 'App',
   components: {
-    Child1,
-    HelloWorld
+      tabber
+
+
+
+
   },
   methods:{
-    handclick(){
-      this.datalist.push(this.mytext);
-    }
+
   }
+
+
+
+
+
 }
 </script>
-
-<style scoped>
+<!--全局样式-->
+<style>
   #text-ul li{
     list-style: none;
-    background-color: red;
+    background-color: yellow;
   }
-  #app {
-    font-family: Avenir, Helvetica, Arial, sans-serif;
-    -webkit-font-smoothing: antialiased;
-    -moz-osx-font-smoothing: grayscale;
-    text-align: center;
-    color: #2c3e50;
-    margin-top: 60px;
+  section{
+      margin-bottom: 50px;
+      padding: 0;
+
   }
+    body{
+        margin: 0;
+    }
+
 </style>
 
