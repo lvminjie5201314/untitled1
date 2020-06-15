@@ -2,9 +2,16 @@
     <div>
         <!--轮播图，插槽-->
         <filmswiper :key="datalist.length" ref="filmswiper">
-            <div class="swiper-slide" v-for="data in datalist" :key="data.bannerId">
-                <img :src="data.imgUrl">
+            <div class="swiper-slide">
+                <img :src="datalist[0].imgUrl">
             </div>
+            <div class="swiper-slide">
+                <img :src="datalist[0].imgUrl">
+            </div>
+            <div class="swiper-slide">
+                <img :src="datalist[0].imgUrl">
+            </div>
+
         </filmswiper>
 
         <!--子组件的导航条-->
@@ -35,19 +42,18 @@
                     'X-Host': 'mall.cfg.common-banner'
                 }
             }).then(res=>{
-                //console.log(res.data.data[0].imgUrl);
+                //console.log(res.data);
                 this.datalist = res.data.data
             });
 
             //监听滚动  吸顶
-            window.onscroll = this.haderScroll();
+            window.onscroll = this.haderScroll;
         },
         methods:{
-
+            //吸顶效果
+            //拿到当前节点的高度  filmswiper为节点名字  .filmswiper.$el.offsetHeight
             haderScroll(){
-                //拿到当前节点的高度  filmswiper为节点名字
-                //console.log(this.$refs.filmswiper.$el.offsetHeight)
-                if(document.documentElement.scrollTop > 400+'px'){
+                if(document.documentElement.scrollTop > this.$refs.filmswiper.$el.offsetHeight){
                     //吸顶
                     this.isfixed = true;
 

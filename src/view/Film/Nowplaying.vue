@@ -1,5 +1,5 @@
 <template>
-    <div>
+    <div v-if="datalist">
         <ul>
             <li v-for="data in datalist" :key="data.filmId" @click="handClick(data.filmId)">
                 <img :src="data.poster" />
@@ -8,31 +8,31 @@
                 <p>主演:{{data.actors | actorsfilter}}</p>
             </li>
             <li  @click="handClick(datalist[0].filmId)">
-                <img :src="datalist[0].poster" />
+                <img :src="this.datalist[0].poster" />
+                <h3>{{datalist[0].name}}</h3>
+                <!--主演是数组。需要过滤器-->
+                <p>主演:{{'' | actorsfilter}}</p>
+            </li>
+            <li  @click="handClick(datalist[0].filmId)">
+                <img :src="this.datalist[0].poster" />
                 <h3>{{datalist[0].name}}</h3>
                 <!--主演是数组。需要过滤器-->
                 <p>主演:{{datalist[0].actors | actorsfilter}}</p>
             </li>
             <li  @click="handClick(datalist[0].filmId)">
-                <img :src="datalist[0].poster" />
+                <img :src="this.datalist[0].poster" />
                 <h3>{{datalist[0].name}}</h3>
                 <!--主演是数组。需要过滤器-->
                 <p>主演:{{datalist[0].actors | actorsfilter}}</p>
             </li>
             <li  @click="handClick(datalist[0].filmId)">
-                <img :src="datalist[0].poster" />
+                <img :src="this.datalist[0].poster" />
                 <h3>{{datalist[0].name}}</h3>
                 <!--主演是数组。需要过滤器-->
                 <p>主演:{{datalist[0].actors | actorsfilter}}</p>
             </li>
             <li  @click="handClick(datalist[0].filmId)">
-                <img :src="datalist[0].poster" />
-                <h3>{{datalist[0].name}}</h3>
-                <!--主演是数组。需要过滤器-->
-                <p>主演:{{datalist[0].actors | actorsfilter}}</p>
-            </li>
-            <li  @click="handClick(datalist[0].filmId)">
-                <img :src="datalist[0].poster" />
+                <img :src="this.datalist[0].poster" />
                 <h3>{{datalist[0].name}}</h3>
                 <!--主演是数组。需要过滤器-->
                 <p>主演:{{datalist[0].actors | actorsfilter}}</p>
@@ -56,7 +56,8 @@
                 //this.$router.push({name:'detail',params: {id:id}});
                 //简写
                 this.$router.push({path:`/detail/${id}`})
-            }
+                //alert(JSON.stringify(this.datalist[0].poster) );
+            },
 
 
         },
@@ -69,8 +70,10 @@
                 }
             }).then(res=>{
                 //console.log(res);
-                this.datalist = res.data.data.films
+                this.datalist = res.data.data.films;
             })
+
+
         },
 
     }

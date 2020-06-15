@@ -10,6 +10,7 @@
   "dependencies": {
     "ajax": "0.0.4",
     "axios": "^0.19.2",
+    "better-scroll": "^1.15.2",
     "bootstrap-icons": "^1.0.0-alpha4",
     "core-js": "^3.6.5",
     "jquery": "^3.5.1",
@@ -17,7 +18,8 @@
     "sass": "^1.26.8",
     "swiper": "^5.4.2",
     "vue": "^2.6.11",
-    "vue-router": "^3.3.2"
+    "vue-router": "^3.3.2",
+    "vuex": "^3.4.0"
   },
   "devDependencies": {
     "@vue/cli-plugin-babel": "~4.4.0",

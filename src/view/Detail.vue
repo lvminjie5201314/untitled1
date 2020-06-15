@@ -14,7 +14,8 @@
 
         <img class="img-t" :src="filminfo.poster">
         <div style="padding: 8px;">
-            <h2> <p>{{filminfo.name}}<span>{{filminfo.grade}}分</span> </p></h2>
+            <!--gradeFilter 如果没评分。用过滤器过滤-->
+            <h2> <p>{{filminfo.name}}<span>{{filminfo.grade | gradeFilter}}</span> </p></h2>
             <p>{{filminfo.category}}</p>
 
             <!--detail轮播组件-->
@@ -41,6 +42,11 @@
 <script>
     import axios from 'axios'
     import detailswiper from './Detail/DetailSwiper'
+    import '@/Filter/gradeFilter'
+    //CHANGE_TABBER_STATE_AS_MUTATION通过常量来控制。提高可维护性
+    import {CHANGE_TABBER_STATE_AS_MUTATION} from "@/status/status";
+
+    //import bus from "@/bus";
 
     export default {
         data(){
@@ -50,6 +56,13 @@
             }
         },
         mounted() {
+            //监听底部导航栏隐藏，显示
+            //bus.$emit("kerwin",false)
+            //第二种方法。利用公共状态
+            //this.$store.state.isTabberShow = false;
+            //第三种方法
+            this.$store.commit(CHANGE_TABBER_STATE_AS_MUTATION,false);
+
             //获取动态路由传过来的id
             //console.log(this.$route.params.id);
             var filmId = this.$route.params.id;
@@ -70,6 +83,21 @@
 
 
         },
+        //离开时，
+        beforeDestroy(){
+            //监听底部导航栏隐藏，显示
+            //bus.$emit("kerwin",true);
+            //第二种方法。利用公共状态
+            //this.$store.state.isTabberShow = true;
+            //第三种方法
+            this.$store.commit(CHANGE_TABBER_STATE_AS_MUTATION,true);
+        },
+        //生命周期周期。销毁
+        destroy(){
+            //销毁滚动监听
+            window.onscroll = null
+
+        },
         methods:{
             //监听滚动事件。吸顶功能
             handleScroll(){
@@ -84,7 +112,7 @@
             },
             //返回上一页
             goBack(){
-                this.$router.push('/film')
+                this.$router.go(-1);
             }
         },
 

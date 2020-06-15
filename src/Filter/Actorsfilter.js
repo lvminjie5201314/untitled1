@@ -3,7 +3,7 @@
 import Vue from 'vue';
 
 Vue.filter('actorsfilter',(data)=>{
-    console.log(data);
+    //console.log(data);
     //如果没有演员
     if(!data){
         return "暂无主演";

@@ -11,6 +11,7 @@ import Comingsoon from '@/view/Film/Comingsoon'
 import Nowplaying from '@/view/Film/Nowplaying'
 Vue.use(VueRouter)//安装路由
 
+//router-view，加到App.Vue中
 const router = new VueRouter({
     //mode:'history',
     //base:process.env.BASE_URL,
@@ -50,8 +51,8 @@ const router = new VueRouter({
             name:'detail',
             component: Detail
         },
-        {   //动态路由
-            path:'/login',//可以传参的跳转。id占位符
+        {
+            path:'/login',//未登录就去login
             name:'login',
             component: Login
         },
@@ -78,7 +79,7 @@ router.beforeEach((to, from, next) => {
         if(user.islogin()){
             next();
         }else {
-            next('login');//去登陆页
+            next('/login');//去登陆页
         }
     }else {
         next();
