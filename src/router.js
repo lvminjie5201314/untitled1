@@ -7,6 +7,7 @@ import Cinema from '@/view/Cinema'
 import Center from '@/view/Center'
 import Detail from '@/view/Detail'
 import Login from '@/view/Login'
+import City from '@/view/City'
 import Comingsoon from '@/view/Film/Comingsoon'
 import Nowplaying from '@/view/Film/Nowplaying'
 Vue.use(VueRouter)//安装路由
@@ -57,9 +58,15 @@ const router = new VueRouter({
             component: Login
         },
         {
+            path:'/city',//城市
+            name:'city',
+            component: City
+        },
+        {
             path: '/',   //直接打根路径，就重定向到film页面
             redirect: '/film'   //根路径重定向
-        }
+        },
+
 
     ]
 

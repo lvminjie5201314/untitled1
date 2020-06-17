@@ -45,7 +45,7 @@
     import '@/Filter/gradeFilter'
     //CHANGE_TABBER_STATE_AS_MUTATION通过常量来控制。提高可维护性
     import {CHANGE_TABBER_STATE_AS_MUTATION} from "@/status/status";
-
+    import {Indicator} from 'mint-ui'//引入加载中组件
     //import bus from "@/bus";
 
     export default {
@@ -56,6 +56,12 @@
             }
         },
         mounted() {
+            //加载中效果
+            Indicator.open({
+                text:'努力加载中...',
+                spinnerType:'fading-circle'
+            })
+
             //监听底部导航栏隐藏，显示
             //bus.$emit("kerwin",false)
             //第二种方法。利用公共状态
@@ -77,6 +83,7 @@
             }).then(res=>{
                 //console.log(res.data);
                 this.filminfo = res.data.data.film
+                Indicator.close()
             });
 
             window.onscroll = this.handleScroll;

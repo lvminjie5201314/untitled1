@@ -26,6 +26,7 @@
     import filmNav from '@/view/Film/FilmNav'
     import filmswiper from '@/view/Film/FilmSwiper'
     import axios from 'axios'
+    import {Indicator} from 'mint-ui'//引入加载中组件
 
     export default {
         data(){
@@ -35,6 +36,13 @@
             }
         },
         mounted(){
+            //加载中效果
+            Indicator.open({
+                text:'努力加载中...',
+                spinnerType:'fading-circle'
+            })
+
+            //请求数据
             axios({
                 url:"https://m.maizuo.com/gateway?type=2&cityId=310100&k=8820394",
                 headers:{
@@ -44,6 +52,8 @@
             }).then(res=>{
                 //console.log(res.data);
                 this.datalist = res.data.data
+                //数据加载完毕，隐藏加载效果
+                Indicator.close();
             });
 
             //监听滚动  吸顶

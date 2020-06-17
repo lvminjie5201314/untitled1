@@ -45,6 +45,8 @@
     import '@/Filter/Actorsfilter'
     import {mapState} from 'vuex'
     import {mapGetters} from 'vuex'
+    import {Indicator} from 'mint-ui'//引入加载中组件
+
 
     export default {
         data(){
@@ -54,13 +56,17 @@
         },
 
         mounted(){
+
+
             //判断数组中是否有数据。如果无数据。进行ajax请求。   否则读取缓存数据
             //alert(this.comingsoonlist.length);
             if(this.comingsoonlist.length==0){
                 this.$store.dispatch("GetComingSoonAction","传参数");
+                Indicator.close()//关闭加载中效果
             }else {
                 console.log("使用缓存数据",this.comingsoonlist)
                 console.log("使用getters",this.filterComingsoonList)
+
             }
         },
         //计算属性写法

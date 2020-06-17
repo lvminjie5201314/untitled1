@@ -3,6 +3,7 @@ import Vuex from 'vuex'
 import axios from 'axios'
 //CHANGE_TABBER_STATE_AS_MUTATION通过常量来控制。提高可维护性
 import {CHANGE_TABBER_STATE_AS_MUTATION} from '@/status/status'
+import {Indicator} from "mint-ui";//引入加载中组件
 Vue.use(Vuex)
 
 
@@ -33,6 +34,11 @@ export default new Vuex.Store({
     actions:{
         //方法快照缓存
         GetComingSoonAction(store){
+            //加载中效果
+            Indicator.open({
+                text:'努力加载中...',
+                spinnerType:'fading-circle'
+            })
             axios({
                 url:"https://m.maizuo.com/gateway?cityId=310100&pageNum=1&pageSize=10&type=2&k=7019585",
                 headers:{
@@ -43,6 +49,7 @@ export default new Vuex.Store({
                 console.log("调用了："+res);
                 //提交给mutations   做缓存
                 store.commit("comingsoonlist",res.data.data.films);
+                Indicator.close()//关闭加载中效果
             })
         }
 
